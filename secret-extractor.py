@@ -12,12 +12,10 @@ import base64
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-# Kanske borde bara skriva om till en klass?
-
 def list_secrets(v1):
     namespace = (input("Which namespace do you want to extract secrets from?\n"))
     secret_list = []
-    secrets = v1.list_namespaced_secret(namespace).items
+    secrets = v1.list_namespaced_secret(namespace, watch=False).items
     if secrets == []:
         print("Namespace not found or no secrets in the namespace")
         exit()
